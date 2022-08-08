@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Api marvel</string>
+    <string name="private_api_key">9f92a54bc3fe95720586c9e2055829cffa566824</string>
+
+
+    <string name="content_description_character_image">Hero image</string>
+
+
 
 </resources>
