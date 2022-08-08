@@ -1,6 +1,5 @@
 package com.jorgeSM.apimarvel.presentation.mapper
 
-import com.jorgeSM.apimarvel.presentation.modelVO.PersonajeProvisional
 import com.jorgeSM.apimarvel.presentation.modelVO.ResultVO
 import com.jorgeSM.apimarvel.remote.models.Result
 
@@ -16,11 +15,5 @@ fun Result.transformToVO() = ResultVO(
     series = this.series,
     stories = this.stories,
     events = this.events
-
 )
 
-fun Result.transformTo() = PersonajeProvisional(
-    name = this.name,
-    image = this.thumbnail?.path + "." + this.thumbnail?.extension
-
-)
