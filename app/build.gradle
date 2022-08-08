@@ -42,7 +42,7 @@ def Okhttp_version = "4.10.0"
 def Coroutines_android_version = "1.3.9"
 def Coroutines_core_version = "1.6.4"
 def Retrofit2_version = "2.9.0"
-
+def Moshi_version =  "1.13.0"
 
 dependencies {
 
@@ -60,6 +60,10 @@ dependencies {
     /** Retrofit */
     implementation "com.squareup.retrofit2:retrofit:$Retrofit2_version"
     implementation "com.squareup.retrofit2:converter-moshi:$Retrofit2_version"
+
+    /** Moshi */
+    implementation "com.squareup.moshi:moshi-kotlin:$Moshi_version"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$Moshi_version"
 
 
 

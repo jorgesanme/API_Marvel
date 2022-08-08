@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.jorgeSM.apimarvel.R
 import com.jorgeSM.apimarvel.databinding.ItemCharacterBinding
-import com.jorgeSM.apimarvel.presentation.modelVO.CharacterVO
+import com.jorgeSM.apimarvel.presentation.modelVO.ResultVO
 
 class CharacterAdapter(
-    private var characterList: List<CharacterVO>
+    private var characterList: List<ResultVO>
 ) : RecyclerView.Adapter<CharacterAdapter.ViewHolder>() {
 
     private lateinit var mContext: Context
@@ -26,19 +26,18 @@ class CharacterAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) =
         holder.bind(characterList[position])
 
-
     override fun getItemCount(): Int = characterList.size
-
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemCharacterBinding.bind(view)
-        fun bind(character: CharacterVO) {
+        fun bind(character: ResultVO) {
             binding.tvName.text = character.name
+            binding.tvId.text = character.id.toString()
+            binding.tvDescription.text = character.description
             Glide.with(binding.root)
                 .load(character.image)
                 .circleCrop()
                 .into(binding.imageView)
-
         }
 
     }
