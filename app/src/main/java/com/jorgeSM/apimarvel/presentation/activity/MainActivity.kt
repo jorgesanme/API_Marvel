@@ -1,33 +1,18 @@
 package com.jorgeSM.apimarvel.presentation.activity
 
 import android.os.Bundle
-import android.util.Log
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.jorgeSM.apimarvel.R
 import com.jorgeSM.apimarvel.databinding.ActivityMainBinding
-import com.jorgeSM.apimarvel.presentation.adapter.CharacterAdapter
-import com.jorgeSM.apimarvel.presentation.mapper.transformToVO
-import com.jorgeSM.apimarvel.presentation.modelVO.ResultVO
-import com.jorgeSM.apimarvel.remote.MarvelApi
-import com.jorgeSM.apimarvel.utils.Const
-import com.jorgeSM.apimarvel.utils.Utils
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import org.kodein.di.DI
+import org.kodein.di.DIAware
+import org.kodein.di.android.di
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), DIAware {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var characterList: MutableList<ResultVO>
-    private lateinit var mAdapter: CharacterAdapter
-    private lateinit var linearLayoutManager: LinearLayoutManager
+
+    override val di: DI by di()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,77 +20,24 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater).also { binding ->
             setContentView(binding.root)
         }
-
-        llamadaAPI()
-
+        setupToolbar()
 
     }
 
-
-    private fun llamadaAPI() {
-        // FIXME: extraer al VeiwModel
-        characterList = mutableListOf()
-
-        GlobalScope.launch(Dispatchers.IO) {
-            val client = OkHttpClient().newBuilder().build()
-            val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
-            val retrofit = Retrofit.Builder()
-                .baseUrl(Const.BASE_URL)
-                .client(client)
-                .addConverterFactory(MoshiConverterFactory.create(moshi))
-                .build()
-            val api: MarvelApi = retrofit.create(MarvelApi::class.java)
-
-            val response = api.getCharacterList(
-                "1",
-                Const.API_PUBLIC_KEY,
-                createEndPointHash()
-            )
-
-            Log.d("Response", response.toString())
-
-            withContext(Dispatchers.Main) {
-
-                response?.data?.results?.map { result ->
-                    characterList.add(
-                        result.transformToVO()
-                    )
-
-                }
-                setupRecycleView(characterList)
-            }
-
-            Log.i("lista", characterList.toString())
-
+    private fun setupToolbar() {
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
         }
-
     }
 
-    /*trasladar al ViewModel*/
-    private fun createMD5(input: String): String {
-        val hash = Utils.createMD5(input)
-        Log.i("Hash", hash)
-        return hash
-    }
-
-    /*trasladar al ViewModel*/
-    private fun createEndPointHash(): String =
-        createMD5(
-            Const.TIME_STAMP.toString()
-                    + getString(R.string.private_api_key)
-                    + Const.API_PUBLIC_KEY
-        )
-
-
-    private fun setupRecycleView(list: List<ResultVO>) {
-        mAdapter = CharacterAdapter(list)
-        linearLayoutManager = LinearLayoutManager(this)
-
-        binding.rvCharacters.apply {
-            setHasFixedSize(true)
-            layoutManager = linearLayoutManager
-            adapter = mAdapter
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> onBackPressed()
         }
+        return super.onOptionsItemSelected(item)
+
     }
 
 

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-rotate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fromDegrees="0"
+    android:pivotX="50%"
+    android:pivotY="50%"
+    android:toDegrees="360">
+
+    <!-- Define the background properties like color etc -->
+
+         <shape
+             android:innerRadiusRatio="3"
+             android:shape="ring"
+             android:thicknessRatio="8"
+             android:useLevel="false">
+
+             <size android:width="76dip"
+                 android:height="76dip"/>
+
+             <gradient
+                 android:angle="0"
+                 android:endColor="#BA4C4C"
+                 android:startColor="#0D47A1"
+                 android:type="sweep"
+                 android:useLevel="false" />
+         </shape>
+
+
+</animated-rotate>
+
+     <!-- Define the progress properties like start color, end color etc
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape>
+                <gradient
+                    android:startColor="#007A00"
+                    android:centerColor="#1172E7"
+                    android:centerY="1.0"
+                    android:endColor="#670F0F"
+                    android:angle="270"
+                    />
+            </shape>
+        </clip>
+    </item>
+    -->
