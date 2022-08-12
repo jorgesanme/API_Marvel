@@ -13,6 +13,11 @@ interface MarvelApi {
         @Query("hash") hash: String
     ): Character?
 
-    @GET
-    suspend fun geCharacterById(characterId: String): Character?
+    @GET(Const.CHARACTER_BY_ID)
+    suspend fun geCharacterById(
+        @Path("characterId")characterId: String,
+        @Query("ts") timeStamp: String,
+        @Query("apikey") apikey: String,
+        @Query("hash") hash: String,
+        ): Character?
 }

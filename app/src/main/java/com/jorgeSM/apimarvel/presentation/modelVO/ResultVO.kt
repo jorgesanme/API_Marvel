@@ -2,6 +2,7 @@ package com.jorgeSM.apimarvel.presentation.modelVO
 
 import com.jorgeSM.apimarvel.remote.models.Comics
 import com.jorgeSM.apimarvel.remote.models.Stories
+import java.io.Serializable
 
 data class ResultVO(
     val id: Long? = null,
@@ -14,4 +15,4 @@ data class ResultVO(
     val series: Comics? = null,
     val stories: Stories? = null,
     val events: Comics? = null
-)
+):Serializable
