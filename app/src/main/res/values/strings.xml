@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Api marvel</string>
+
+    <string name="content_description_character_image">Hero image</string>
+    <string name="comics">Comics</string>
+    <string name="stories">Stories</string>
+
+    <string name="fragment_title_detail">Character Details</string>
+    <string name="fragment_title_list">Marvel List</string>
+    <string name="events">Events</string>
+    <string name="series">Series</string>
+    <string name="modified">Modified</string>
+
+
+</resources>
