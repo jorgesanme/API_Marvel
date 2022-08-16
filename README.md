@@ -15,6 +15,8 @@ A partir de una tarjeta, se pasa el Id de cada personaje a la pantalla de Detall
 
 <img src="https://github.com/jorgesanme/API_Marvel/blob/main/Images/detail.gif" width="200" height="350" />
 
+## Librerias
+
 Para ello se ha usado:
 - **Okhttp3**  => Punto de inicio de las llamadas a red.
 - **Retrofit**  => Llamadas a red para descargar datos más simplificadas. La construción de la url de llamadas es + simple
