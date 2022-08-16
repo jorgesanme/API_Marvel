@@ -9,10 +9,11 @@ Como su nombre ya indica, esta app consume  datos obtenidos desde  [Marvel](http
 ## Explicación de la app:
 La app muestra los datos más identificativos de los personajes de Marvel en una CardView.  El conjunto de CardView se muestra en la un RecycleView.
 
-<img src="https://github.com/jorgesanme/API_Marvel/blob/main/Images/start.gif" width="400" height="50" />
+<img src="https://github.com/jorgesanme/API_Marvel/blob/main/Images/start.gif" width="200" height="350" />
 
 A partir de una tarjeta, se pasa el Id de cada personaje a la pantalla de Detalles. En esta pantalla se llama nuevamente a la API para obtener los detalles del mismo.
-<img src="https://github.com/jorgesanme/API_Marvel/blob/main/Images/detail.gif" width="400" height="50" />
+
+<img src="https://github.com/jorgesanme/API_Marvel/blob/main/Images/detail.gif" width="200" height="350" />
 
 Para ello se ha usado:
 - **Okhttp3**  => Punto de inicio de las llamadas a red.
