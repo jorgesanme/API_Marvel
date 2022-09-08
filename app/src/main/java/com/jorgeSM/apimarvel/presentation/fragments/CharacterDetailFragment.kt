@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.jorgeSM.apimarvel.databinding.FragmentCharacterDetailBinding
@@ -22,7 +21,6 @@ const val CHARACTER_NAME = "name"
 
 class CharacterDetailFragment : Fragment() {
     private lateinit var mBinding: FragmentCharacterDetailBinding
-    private lateinit var navHostFragment: NavHostFragment
     private val mViewModel: CharacterViewModel by viewModels()
     private var characterId: String? = null
     private var name: String? = null
@@ -91,6 +89,7 @@ class CharacterDetailFragment : Fragment() {
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {

@@ -7,6 +7,8 @@
     android:background="@drawable/marvel_bg_short"
     tools:context=".presentation.fragments.CharacterDetailFragment">
 
+    
+    
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="@dimen/size_250"

@@ -10,7 +10,7 @@ data class Character(
     val copyright: String? = null,
     val attributionText: String? = null,
     val attributionHTML: String? = null,
-    val etag: String? = null,
+    val eTag: String? = null,
     val data: Data? = null
 )
 

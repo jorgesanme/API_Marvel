@@ -18,7 +18,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-class CharacterViewModel() : ViewModel() {
+class CharacterViewModel : ViewModel() {
 
     private val _characterList = MutableLiveData<List<ResultVO>>()
     val characterList: LiveData<List<ResultVO>> get() = _characterList
