@@ -1,4 +1,4 @@
-package com.jorgeSM.apimarvel.remote.models
+package com.jorgeSM.apimarvel.data.remote.models
 
 data class URL(
     val type: String? = null,

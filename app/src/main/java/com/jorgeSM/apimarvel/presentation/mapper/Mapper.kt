@@ -1,7 +1,7 @@
 package com.jorgeSM.apimarvel.presentation.mapper
 
 import com.jorgeSM.apimarvel.presentation.modelVO.ResultVO
-import com.jorgeSM.apimarvel.remote.models.Result
+import com.jorgeSM.apimarvel.data.remote.models.Result
 
 
 fun Result.transformToVO() = ResultVO(

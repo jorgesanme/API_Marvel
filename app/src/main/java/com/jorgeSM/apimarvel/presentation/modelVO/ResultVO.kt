@@ -1,7 +1,7 @@
 package com.jorgeSM.apimarvel.presentation.modelVO
 
-import com.jorgeSM.apimarvel.remote.models.Comics
-import com.jorgeSM.apimarvel.remote.models.Stories
+import com.jorgeSM.apimarvel.data.remote.models.Comics
+import com.jorgeSM.apimarvel.data.remote.models.Stories
 import java.io.Serializable
 
 data class ResultVO(

@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jorgeSM.apimarvel.data.MarvelRepositoryImp
-import com.jorgeSM.apimarvel.data.remote.models.ListOfCharacterRequest
+import com.jorgeSM.apimarvel.data.remote.models.CharacterItemByIdRequest
 import com.jorgeSM.apimarvel.presentation.mapper.transformToVO
 import com.jorgeSM.apimarvel.presentation.modelVO.ResultVO
 import kotlinx.coroutines.Dispatchers
@@ -13,27 +13,31 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class CharacterViewModel(
+/*****
+ * Projecto: Api marvel
+ * From: com.jorgeSM.apimarvel.viewmodel
+ * Create by Jorge S. Medina on 9/9/22 at 10:32
+ * More info: https://www.linkedin.com/in/jorge-s%C3%A1nchez-medina-bb7b7371/
+ *****/
+class DetailsViewModel(
     private val marvelRepositoryImp: MarvelRepositoryImp = MarvelRepositoryImp()
-) : ViewModel() {
+):ViewModel() {
 
-    private val _characterList = MutableLiveData<List<ResultVO>>()
-    val characterList: LiveData<List<ResultVO>> get() = _characterList
+    private val _character = MutableLiveData<ResultVO>()
+    val character: LiveData<ResultVO> get() = _character
 
     private var requestJob: Job? = null
 
-    fun getCharacterList(hash: String) {
+    fun getCharacterById(id: String, hash: String) {
         requestJob?.cancel()
-        val list1 = mutableListOf<ResultVO>()
         requestJob = viewModelScope.launch(Dispatchers.IO) {
-            val characterList = marvelRepositoryImp.getCharacterList(ListOfCharacterRequest(hash))
+            val character = marvelRepositoryImp.geCharacterById(
+                CharacterItemByIdRequest(id,hash)
+            )
             withContext(Dispatchers.Main) {
-                characterList.map {
-                    it?.data?.results?.map { result ->
-                        list1.add(result.transformToVO())
-                    }
+                character?.data?.results?.map {
+                    _character.postValue(it.transformToVO())
                 }
-                _characterList.postValue(list1)
             }
         }
     }

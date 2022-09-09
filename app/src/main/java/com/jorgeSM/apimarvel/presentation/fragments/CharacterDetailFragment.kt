@@ -14,6 +14,7 @@ import com.jorgeSM.apimarvel.presentation.activity.MainActivity
 import com.jorgeSM.apimarvel.presentation.modelVO.ResultVO
 import com.jorgeSM.apimarvel.utils.Utils
 import com.jorgeSM.apimarvel.viewmodel.CharacterViewModel
+import com.jorgeSM.apimarvel.viewmodel.DetailsViewModel
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
 const val CHARACTER_ID = "id"
@@ -21,7 +22,7 @@ const val CHARACTER_NAME = "name"
 
 class CharacterDetailFragment : Fragment() {
     private lateinit var mBinding: FragmentCharacterDetailBinding
-    private val mViewModel: CharacterViewModel by viewModels()
+    private val mViewModel: DetailsViewModel by viewModels()
     private var characterId: String? = null
     private var name: String? = null
 
