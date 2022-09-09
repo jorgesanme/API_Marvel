@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jorgeSM.apimarvel.data.MarvelRepositoryImp
 import com.jorgeSM.apimarvel.data.remote.models.CharacterItemByIdRequest
+import com.jorgeSM.apimarvel.domain.usecase.GetCharacterByIdUC
 import com.jorgeSM.apimarvel.presentation.mapper.transformToVO
 import com.jorgeSM.apimarvel.presentation.modelVO.ResultVO
 import kotlinx.coroutines.Dispatchers
@@ -20,8 +20,8 @@ import kotlinx.coroutines.withContext
  * More info: https://www.linkedin.com/in/jorge-s%C3%A1nchez-medina-bb7b7371/
  *****/
 class DetailsViewModel(
-    private val marvelRepositoryImp: MarvelRepositoryImp = MarvelRepositoryImp()
-):ViewModel() {
+    private val getCharacterByIdUC: GetCharacterByIdUC = GetCharacterByIdUC()
+) : ViewModel() {
 
     private val _character = MutableLiveData<ResultVO>()
     val character: LiveData<ResultVO> get() = _character
@@ -29,10 +29,11 @@ class DetailsViewModel(
     private var requestJob: Job? = null
 
     fun getCharacterById(id: String, hash: String) {
+
         requestJob?.cancel()
         requestJob = viewModelScope.launch(Dispatchers.IO) {
-            val character = marvelRepositoryImp.geCharacterById(
-                CharacterItemByIdRequest(id,hash)
+            val character = getCharacterByIdUC.invoke(
+                CharacterItemByIdRequest(id, hash)
             )
             withContext(Dispatchers.Main) {
                 character?.data?.results?.map {

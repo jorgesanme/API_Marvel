@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jorgeSM.apimarvel.data.MarvelRepositoryImp
 import com.jorgeSM.apimarvel.data.remote.models.ListOfCharacterRequest
+import com.jorgeSM.apimarvel.domain.usecase.GetCharacterListUC
 import com.jorgeSM.apimarvel.presentation.mapper.transformToVO
 import com.jorgeSM.apimarvel.presentation.modelVO.ResultVO
 import kotlinx.coroutines.Dispatchers
@@ -13,8 +14,8 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class CharacterViewModel(
-    private val marvelRepositoryImp: MarvelRepositoryImp = MarvelRepositoryImp()
+class CharacterListViewModel(
+    private val characterListUC: GetCharacterListUC = GetCharacterListUC()
 ) : ViewModel() {
 
     private val _characterList = MutableLiveData<List<ResultVO>>()
@@ -26,7 +27,10 @@ class CharacterViewModel(
         requestJob?.cancel()
         val list1 = mutableListOf<ResultVO>()
         requestJob = viewModelScope.launch(Dispatchers.IO) {
-            val characterList = marvelRepositoryImp.getCharacterList(ListOfCharacterRequest(hash))
+//            val characterList = marvelRepositoryImp.getCharacterList(ListOfCharacterRequest(hash))
+            val characterList = characterListUC.invoke(
+                ListOfCharacterRequest(hash)
+            )
             withContext(Dispatchers.Main) {
                 characterList.map {
                     it?.data?.results?.map { result ->

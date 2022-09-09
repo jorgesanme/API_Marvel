@@ -16,14 +16,14 @@ import com.jorgeSM.apimarvel.presentation.activity.MainActivity
 import com.jorgeSM.apimarvel.presentation.adapter.CharacterAdapter
 import com.jorgeSM.apimarvel.presentation.modelVO.ResultVO
 import com.jorgeSM.apimarvel.utils.Utils
-import com.jorgeSM.apimarvel.viewmodel.CharacterViewModel
+import com.jorgeSM.apimarvel.viewmodel.CharacterListViewModel
 
 class CharacterListFragment : Fragment() {
 
     private lateinit var mBinding: FragmentCharacterListBinding
     private lateinit var mAdapter: CharacterAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private val mViewModel: CharacterViewModel by viewModels()
+    private val mViewModel: CharacterListViewModel by viewModels()
     private lateinit var mContext: Context
 
 
