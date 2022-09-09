@@ -15,4 +15,4 @@ data class ResultVO(
     val series: Comics? = null,
     val stories: Stories? = null,
     val events: Comics? = null
-):Serializable
+) : Serializable

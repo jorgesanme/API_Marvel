@@ -4,7 +4,7 @@ data class Result(
     val id: Long? = null,
     val name: String? = null,
     val description: String? = null,
-    val modified: String? = null,
+    val modified: String? = null, // FIXME: ver en doc si viene como long o Date
     val thumbnail: Thumbnail? = null,
     val resourceURI: String? = null,
     val comics: Comics? = null,

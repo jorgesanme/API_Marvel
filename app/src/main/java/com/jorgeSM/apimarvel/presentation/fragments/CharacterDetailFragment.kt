@@ -85,7 +85,7 @@ class CharacterDetailFragment : Fragment() {
                 .transform(RoundedCornersTransformation(16, 0))
                 .into(image)
 
-            // TODO: Opcional listado del contenido de comics, events, series, stories
+
         }
     }
 

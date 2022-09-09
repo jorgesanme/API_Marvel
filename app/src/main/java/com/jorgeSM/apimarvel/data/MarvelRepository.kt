@@ -11,6 +11,6 @@ import com.jorgeSM.apimarvel.data.remote.models.ListOfCharacterRequest
  * More info: https://www.linkedin.com/in/jorge-s%C3%A1nchez-medina-bb7b7371/
  *****/
 interface MarvelRepository {
-    suspend fun getCharacterList(characterRequest: ListOfCharacterRequest): List<CharacterResponse?>
+    suspend fun getCharacterList(request: ListOfCharacterRequest): List<CharacterResponse?>
     suspend fun geCharacterById(request: CharacterItemByIdRequest):CharacterResponse?
 }

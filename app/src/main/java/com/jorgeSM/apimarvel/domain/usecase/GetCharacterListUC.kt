@@ -15,7 +15,7 @@ class GetCharacterListUC(
 ) {
 
 
-    suspend fun invoke(request: ListOfCharacterRequest): List<CharacterResponse?> =
+    suspend operator fun invoke(request: ListOfCharacterRequest): List<CharacterResponse?> =
         repositoryImp.getCharacterList(request)
 
 }

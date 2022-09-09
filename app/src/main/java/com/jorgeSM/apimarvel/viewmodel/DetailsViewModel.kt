@@ -11,7 +11,6 @@ import com.jorgeSM.apimarvel.presentation.modelVO.ResultVO
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 /*****
  * Projecto: Api marvel
@@ -32,12 +31,11 @@ class DetailsViewModel(
 
         requestJob?.cancel()
         requestJob = viewModelScope.launch(Dispatchers.IO) {
-            val character = getCharacterByIdUC.invoke(
+            getCharacterByIdUC(
                 CharacterItemByIdRequest(id, hash)
-            )
-            withContext(Dispatchers.Main) {
-                character?.data?.results?.map {
-                    _character.postValue(it.transformToVO())
+            )?.let {
+                it.data?.results?.map { result ->
+                    _character.postValue(result.transformToVO())
                 }
             }
         }

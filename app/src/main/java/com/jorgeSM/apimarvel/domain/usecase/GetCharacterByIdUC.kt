@@ -13,6 +13,6 @@ import com.jorgeSM.apimarvel.data.remote.models.CharacterResponse
 class GetCharacterByIdUC(
     private val repositoryImp: MarvelRepositoryImp = MarvelRepositoryImp()
 ) {
-    suspend fun invoke(request: CharacterItemByIdRequest): CharacterResponse? =
+    suspend operator fun invoke(request: CharacterItemByIdRequest): CharacterResponse? =
         repositoryImp.geCharacterById(request)
 }

@@ -1,6 +1,5 @@
 package com.jorgeSM.apimarvel.data.remote.models
 
-import android.os.Parcelable
 import com.squareup.moshi.JsonClass
 import java.io.Serializable
 
@@ -14,7 +13,7 @@ data class CharacterResponse(
     val attributionHTML: String? = null,
     val eTag: String? = null,
     val data: Data? = null
-): Serializable
+) : Serializable
 
 
 
