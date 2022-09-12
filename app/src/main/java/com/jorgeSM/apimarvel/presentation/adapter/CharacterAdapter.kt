@@ -42,9 +42,10 @@ class CharacterAdapter(
                 tvName.text = character.name
                 tvId.text = character.id.toString()
                 tvDescription.text = character.description
-                // FIXME: Dar formato a la fecha
 
+                // FIXME: Dar formato a la fecha
                 character.modified?.let {tvModified.text = root.context.getString(R.string.modified) + ": $it"}
+
                 cvCharacter.setOnClickListener { onClick(character) }
                 Glide.with(root)
                     .load(character.image)

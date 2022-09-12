@@ -7,14 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.jorgeSM.apimarvel.databinding.FragmentCharacterDetailBinding
 import com.jorgeSM.apimarvel.presentation.activity.MainActivity
 import com.jorgeSM.apimarvel.presentation.modelVO.ResultVO
+import com.jorgeSM.apimarvel.presentation.viewmodel.DetailsViewModel
 import com.jorgeSM.apimarvel.utils.Utils
-import com.jorgeSM.apimarvel.viewmodel.CharacterViewModel
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
 const val CHARACTER_ID = "id"
@@ -22,8 +21,7 @@ const val CHARACTER_NAME = "name"
 
 class CharacterDetailFragment : Fragment() {
     private lateinit var mBinding: FragmentCharacterDetailBinding
-    private lateinit var navHostFragment: NavHostFragment
-    private val mViewModel: CharacterViewModel by viewModels()
+    private val mViewModel: DetailsViewModel by viewModels()
     private var characterId: String? = null
     private var name: String? = null
 
@@ -87,10 +85,11 @@ class CharacterDetailFragment : Fragment() {
                 .transform(RoundedCornersTransformation(16, 0))
                 .into(image)
 
-            // TODO: Opcional listado del contenido de comics, events, series, stories
+
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
