@@ -19,8 +19,8 @@ A partir de una tarjeta, se pasa el Id de cada personaje a la pantalla de Detall
 
 Para ello se ha usado:
 - **Okhttp3**  => Punto de inicio de las llamadas a red.
-- **Retrofit**  => Llamadas a red para descargar datos más simplificadas. La construción de la url de llamadas es + simple
-- **Binding** => Eliminar código repetitivo en la vinculación de código con las views del xml.
+- **Retrofit**  => Llamadas a red para descargar datos más simplificadas. La construción de la url de llamadas es más simple
+- **ViewBinding** => Eliminar código repetitivo en la vinculación de código con las views del xml.
 
 - **Glide**  => Evitar parcear un stream de datos a Bitmap en la descarga de las imagenes desde http. Tiene Cache de imagen y aporta funcionalidad para modificar los bordes redondeados.
 - **Coroutines** => Trabajar en Async en background para no bloquear el hilo main de la UI.
