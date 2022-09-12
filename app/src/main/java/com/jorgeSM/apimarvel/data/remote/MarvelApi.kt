@@ -1,6 +1,6 @@
 package com.jorgeSM.apimarvel.data.remote
 
-import com.jorgeSM.apimarvel.data.remote.models.CharacterResponse
+import com.jorgeSM.apimarvel.data.remote.models.CharacterResponseDTO
 import com.jorgeSM.apimarvel.utils.Const
 import retrofit2.http.*
 
@@ -11,7 +11,7 @@ interface MarvelApi {
         @Query("ts") timeStamp: String,
         @Query("apikey") apikey: String,
         @Query("hash") hash: String
-    ): CharacterResponse?
+    ): CharacterResponseDTO?
 
     @GET(Const.CHARACTER_BY_ID)
     suspend fun geCharacterById(
@@ -19,5 +19,5 @@ interface MarvelApi {
         @Query("ts") timeStamp: String,
         @Query("apikey") apikey: String,
         @Query("hash") hash: String,
-        ): CharacterResponse?
+        ): CharacterResponseDTO?
 }

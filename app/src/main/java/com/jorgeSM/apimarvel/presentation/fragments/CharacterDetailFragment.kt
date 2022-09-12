@@ -12,8 +12,8 @@ import com.bumptech.glide.Glide
 import com.jorgeSM.apimarvel.databinding.FragmentCharacterDetailBinding
 import com.jorgeSM.apimarvel.presentation.activity.MainActivity
 import com.jorgeSM.apimarvel.presentation.modelVO.ResultVO
+import com.jorgeSM.apimarvel.presentation.viewmodel.DetailsViewModel
 import com.jorgeSM.apimarvel.utils.Utils
-import com.jorgeSM.apimarvel.viewmodel.DetailsViewModel
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
 const val CHARACTER_ID = "id"

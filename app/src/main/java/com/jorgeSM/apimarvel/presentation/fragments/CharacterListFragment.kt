@@ -16,7 +16,7 @@ import com.jorgeSM.apimarvel.presentation.activity.MainActivity
 import com.jorgeSM.apimarvel.presentation.adapter.CharacterAdapter
 import com.jorgeSM.apimarvel.presentation.modelVO.ResultVO
 import com.jorgeSM.apimarvel.utils.Utils
-import com.jorgeSM.apimarvel.viewmodel.CharacterListViewModel
+import com.jorgeSM.apimarvel.presentation.viewmodel.CharacterListViewModel
 
 class CharacterListFragment : Fragment() {
 

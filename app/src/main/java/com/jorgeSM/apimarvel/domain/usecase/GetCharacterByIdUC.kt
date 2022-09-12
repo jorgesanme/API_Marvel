@@ -1,8 +1,8 @@
 package com.jorgeSM.apimarvel.domain.usecase
 
 import com.jorgeSM.apimarvel.data.MarvelRepositoryImp
-import com.jorgeSM.apimarvel.data.remote.models.CharacterItemByIdRequest
-import com.jorgeSM.apimarvel.data.remote.models.CharacterResponse
+import com.jorgeSM.apimarvel.data.remote.models.CharacterItemByIdRequestDTO
+import com.jorgeSM.apimarvel.data.remote.models.CharacterResponseDTO
 
 /*****
  * Projecto: Api marvel
@@ -13,6 +13,6 @@ import com.jorgeSM.apimarvel.data.remote.models.CharacterResponse
 class GetCharacterByIdUC(
     private val repositoryImp: MarvelRepositoryImp = MarvelRepositoryImp()
 ) {
-    suspend operator fun invoke(request: CharacterItemByIdRequest): CharacterResponse? =
+    suspend operator fun invoke(request: CharacterItemByIdRequestDTO): CharacterResponseDTO? =
         repositoryImp.geCharacterById(request)
 }

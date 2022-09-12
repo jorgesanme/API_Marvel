@@ -1,9 +1,9 @@
 package com.jorgeSM.apimarvel.data
 
 import com.jorgeSM.apimarvel.data.remote.MarvelApi
-import com.jorgeSM.apimarvel.data.remote.models.CharacterItemByIdRequest
-import com.jorgeSM.apimarvel.data.remote.models.CharacterResponse
-import com.jorgeSM.apimarvel.data.remote.models.ListOfCharacterRequest
+import com.jorgeSM.apimarvel.data.remote.models.CharacterItemByIdRequestDTO
+import com.jorgeSM.apimarvel.data.remote.models.CharacterResponseDTO
+import com.jorgeSM.apimarvel.data.remote.models.ListOfCharacterRequestDTO
 import com.jorgeSM.apimarvel.utils.Const
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -17,7 +17,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
  * Create by Jorge S. Medina on 8/9/22 at 15:38
  * More info: https://www.linkedin.com/in/jorge-s%C3%A1nchez-medina-bb7b7371/
  *****/
-class MarvelRepositoryImp: MarvelRepository {
+class MarvelRepositoryImp: MarvelRepositoryDataSource {
 
     private var api: MarvelApi
 
@@ -32,18 +32,18 @@ class MarvelRepositoryImp: MarvelRepository {
         api = retrofit.create(MarvelApi::class.java)
     }
 
-    override suspend fun getCharacterList(request: ListOfCharacterRequest): List<CharacterResponse?> {
+    override suspend fun getCharacterList(request: ListOfCharacterRequestDTO): List<CharacterResponseDTO?> {
         val response = api.getCharacterList(
             Const.TIME_STAMP.toString(),
             Const.API_PUBLIC_KEY,
             request.hast)
-        val list = mutableListOf<CharacterResponse?>()
+        val list = mutableListOf<CharacterResponseDTO?>()
             list.add(response)
         return list
 
     }
 
-    override suspend fun geCharacterById(request: CharacterItemByIdRequest): CharacterResponse? {
+    override suspend fun geCharacterById(request: CharacterItemByIdRequestDTO): CharacterResponseDTO? {
         return api.geCharacterById(
             request.id,
             Const.TIME_STAMP.toString(),
