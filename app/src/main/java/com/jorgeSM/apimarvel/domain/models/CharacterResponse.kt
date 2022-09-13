@@ -31,9 +31,9 @@ data class Result(
     val thumbnail: Thumbnail? = null,
     val resourceURI: String? = null,
     val comics: Comics? = null,
-    val series: Comics? = null,
+    val series: Series? = null,
     val stories: Stories? = null,
-    val events: Comics? = null,
+    val events: Event? = null,
     val urls: List<URL>? = null
 )
 
@@ -44,10 +44,24 @@ data class Comics(
     val returned: Long? = null
 )
 
+data class Series(
+    val available: Long? = null,
+    val collectionURI: String? = null,
+    val items: List<SeriesItem>? = null,
+    val returned: Long? = null
+)
+
 data class Stories(
     val available: Long? = null,
     val collectionURI: String? = null,
     val items: List<StoriesItem>? = null,
+    val returned: Long? = null
+)
+
+data class Event(
+    val available: Long? = null,
+    val collectionURI: String? = null,
+    val items: List<EventsItem>? = null,
     val returned: Long? = null
 )
 
@@ -61,10 +75,20 @@ data class ComicsItem(
     val name: String? = null
 )
 
+data class SeriesItem(
+    val resourceURI: String? = null,
+    val name: String? = null,
+)
+
 data class StoriesItem(
     val resourceURI: String? = null,
     val name: String? = null,
     val type: String? = null
+)
+
+data class EventsItem(
+    val resourceURI: String? = null,
+    val name: String? = null
 )
 
 data class Thumbnail(

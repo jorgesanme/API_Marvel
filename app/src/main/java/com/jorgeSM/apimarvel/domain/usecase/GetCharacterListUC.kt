@@ -1,8 +1,9 @@
 package com.jorgeSM.apimarvel.domain.usecase
 
 import com.jorgeSM.apimarvel.data.MarvelRepositoryImp
-import com.jorgeSM.apimarvel.data.remote.models.CharacterResponseDTO
-import com.jorgeSM.apimarvel.data.remote.models.ListOfCharacterRequestDTO
+import com.jorgeSM.apimarvel.data.remote.dto.CharacterResponseDTO
+import com.jorgeSM.apimarvel.domain.mapper.transform
+import com.jorgeSM.apimarvel.domain.models.ListOfCharacterRequest
 
 /*****
  * Projecto: Api marvel
@@ -15,7 +16,7 @@ class GetCharacterListUC(
 ) {
 
 
-    suspend operator fun invoke(request: ListOfCharacterRequestDTO): List<CharacterResponseDTO?> =
-        repositoryImp.getCharacterList(request)
+    suspend operator fun invoke(request: ListOfCharacterRequest): List<CharacterResponseDTO?> =
+        repositoryImp.getCharacterList(request.transform())
 
 }

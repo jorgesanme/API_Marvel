@@ -1,8 +1,8 @@
 package com.jorgeSM.apimarvel.data
 
-import com.jorgeSM.apimarvel.data.remote.models.CharacterItemByIdRequestDTO
-import com.jorgeSM.apimarvel.data.remote.models.CharacterResponseDTO
-import com.jorgeSM.apimarvel.data.remote.models.ListOfCharacterRequestDTO
+import com.jorgeSM.apimarvel.data.remote.dto.CharacterItemByIdRequestDTO
+import com.jorgeSM.apimarvel.data.remote.dto.CharacterResponseDTO
+import com.jorgeSM.apimarvel.data.remote.dto.ListOfCharacterRequestDTO
 
 /*****
  * Projecto: Api marvel
@@ -12,5 +12,5 @@ import com.jorgeSM.apimarvel.data.remote.models.ListOfCharacterRequestDTO
  *****/
 interface MarvelRepositoryDataSource {
     suspend fun getCharacterList(request: ListOfCharacterRequestDTO): List<CharacterResponseDTO?>
-    suspend fun geCharacterById(request: CharacterItemByIdRequestDTO):CharacterResponseDTO?
+    suspend fun geCharacterById(request: CharacterItemByIdRequestDTO): CharacterResponseDTO?
 }

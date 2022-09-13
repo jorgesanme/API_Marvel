@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jorgeSM.apimarvel.data.remote.models.CharacterItemByIdRequestDTO
+import com.jorgeSM.apimarvel.domain.models.CharacterItemByIdRequest
 import com.jorgeSM.apimarvel.domain.usecase.GetCharacterByIdUC
 import com.jorgeSM.apimarvel.presentation.mapper.transformToVO
 import com.jorgeSM.apimarvel.presentation.modelVO.ResultVO
@@ -32,7 +32,7 @@ class DetailsViewModel(
         requestJob?.cancel()
         requestJob = viewModelScope.launch(Dispatchers.IO) {
             getCharacterByIdUC(
-                CharacterItemByIdRequestDTO(id, hash)
+                CharacterItemByIdRequest(id, hash)
             )?.let {
                 it.data?.results?.map { result ->
                     _character.postValue(result.transformToVO())

@@ -1,9 +1,9 @@
 package com.jorgeSM.apimarvel.data
 
 import com.jorgeSM.apimarvel.data.remote.MarvelApi
-import com.jorgeSM.apimarvel.data.remote.models.CharacterItemByIdRequestDTO
-import com.jorgeSM.apimarvel.data.remote.models.CharacterResponseDTO
-import com.jorgeSM.apimarvel.data.remote.models.ListOfCharacterRequestDTO
+import com.jorgeSM.apimarvel.data.remote.dto.CharacterItemByIdRequestDTO
+import com.jorgeSM.apimarvel.data.remote.dto.CharacterResponseDTO
+import com.jorgeSM.apimarvel.data.remote.dto.ListOfCharacterRequestDTO
 import com.jorgeSM.apimarvel.utils.Const
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -17,7 +17,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
  * Create by Jorge S. Medina on 8/9/22 at 15:38
  * More info: https://www.linkedin.com/in/jorge-s%C3%A1nchez-medina-bb7b7371/
  *****/
-class MarvelRepositoryImp: MarvelRepositoryDataSource {
+class MarvelRepositoryImp : MarvelRepositoryDataSource {
 
     private var api: MarvelApi
 
@@ -36,9 +36,10 @@ class MarvelRepositoryImp: MarvelRepositoryDataSource {
         val response = api.getCharacterList(
             Const.TIME_STAMP.toString(),
             Const.API_PUBLIC_KEY,
-            request.hast)
+            request.hast
+        )
         val list = mutableListOf<CharacterResponseDTO?>()
-            list.add(response)
+        list.add(response)
         return list
 
     }
