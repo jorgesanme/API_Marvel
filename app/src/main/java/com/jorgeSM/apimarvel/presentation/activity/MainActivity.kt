@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity(), DIAware {
             setContentView(binding.root)
         }
         setupToolbar()
+        // TODO: eliminar este mensaje despues de testear el push 
 
     }
 
