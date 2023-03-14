@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jorgeSM.apimarvel.R
@@ -17,6 +20,7 @@ import com.jorgeSM.apimarvel.presentation.adapter.CharacterAdapter
 import com.jorgeSM.apimarvel.presentation.modelVO.ResultVO
 import com.jorgeSM.apimarvel.utils.Utils
 import com.jorgeSM.apimarvel.presentation.viewmodel.CharacterListViewModel
+import kotlinx.coroutines.launch
 
 class CharacterListFragment : Fragment() {
 
@@ -62,9 +66,15 @@ class CharacterListFragment : Fragment() {
 
 
     private fun setupObserver() {
-        mViewModel.characterList.observe(viewLifecycleOwner) {
-            setupRecycleView(it)
-            mBinding.progressBar.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                mViewModel.state.collect{
+                    it.characters?.let { list ->
+                        setupRecycleView(list)
+                    }
+                    mBinding.progressBar.visibility = if(it.loading) View.VISIBLE else View.GONE
+                }
+            }
         }
     }
 
@@ -87,6 +97,7 @@ class CharacterListFragment : Fragment() {
             putString(CHARACTER_NAME, character.name)
         }
         findNavController().navigate(R.id.characterDetailFragment, bundle)
+        mViewModel.onNavigationDone()
 
     }
 }

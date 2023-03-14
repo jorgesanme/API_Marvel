@@ -1,7 +1,5 @@
 package com.jorgeSM.apimarvel.presentation.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jorgeSM.apimarvel.domain.models.CharacterItemByIdRequest
@@ -10,20 +8,27 @@ import com.jorgeSM.apimarvel.presentation.mapper.transformToVO
 import com.jorgeSM.apimarvel.presentation.modelVO.ResultVO
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-/*****
- * Projecto: Api marvel
- * From: com.jorgeSM.apimarvel.presentation.viewmodel
- * Create by Jorge S. Medina on 9/9/22 at 10:32
- * More info: https://www.linkedin.com/in/jorge-s%C3%A1nchez-medina-bb7b7371/
- *****/
+
 class DetailsViewModel(
     private val getCharacterByIdUC: GetCharacterByIdUC = GetCharacterByIdUC()
 ) : ViewModel() {
 
-    private val _character = MutableLiveData<ResultVO>()
-    val character: LiveData<ResultVO> get() = _character
+    private val _character = MutableStateFlow(DetailState())
+    val character: StateFlow<DetailState> get() = _character.asStateFlow()
+    init {
+        refresh()
+    }
+
+    private fun refresh() =
+        viewModelScope.launch{
+            _character.value = DetailState(loading = true)
+        }
+
 
     private var requestJob: Job? = null
 
@@ -35,9 +40,13 @@ class DetailsViewModel(
                 CharacterItemByIdRequest(id, hash)
             )?.let {
                 it.data?.results?.map { result ->
-                    _character.postValue(result.transformToVO())
+                    _character.value = DetailState(character = result.transformToVO(), loading = false)
                 }
             }
         }
     }
 }
+data class DetailState(
+    val loading:Boolean = false,
+    val character: ResultVO? = null
+)
