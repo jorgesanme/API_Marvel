@@ -3,21 +3,8 @@ package com.jorgeSM.apimarvel.domain.mapper
 import com.jorgeSM.apimarvel.data.remote.dto.*
 import com.jorgeSM.apimarvel.domain.models.*
 
-/*****
- * Projecto: Api marvel
- * From: com.jorgeSM.apimarvel.domain.mapper
- * Create by Jorge S. Medina on 12/9/22 at 15:28
- * More info: https://www.linkedin.com/in/jorge-s%C3%A1nchez-medina-bb7b7371/
- *****/
 
-/*fun CharacterItemByIdRequestDTO.transform() = CharacterItemByIdRequest(
-    id = this.id,
-    hast = this.hast
-)
 
-fun ListOfCharacterRequestDTO.transform() = ListOfCharacterRequest(
-    hast = this.hast
-)*/
 
 fun CharacterItemByIdRequest.transform() = CharacterItemByIdRequestDTO(
     id = this.id,

@@ -40,16 +40,9 @@ class CharacterDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         getParams()
         setupToolbar()
-        showProgressbar()
         getCharacterDetails()
         setupObserver()
     }
-
-
-    private fun showProgressbar() {
-        mBinding.progressBar.progress
-    }
-
 
     private fun setupObserver() {
         lifecycleScope.launch {
@@ -62,10 +55,6 @@ class CharacterDetailFragment : Fragment() {
                 }
             }
         }
-//        mViewModel.character.observe(viewLifecycleOwner) {
-//            setupView(it)
-//            mBinding.progressBar.visibility = if (it == null) View.VISIBLE else View.GONE
-//        }
     }
 
     private fun getCharacterDetails() {

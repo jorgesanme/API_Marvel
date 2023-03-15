@@ -18,8 +18,11 @@ class CharacterListViewModel(
     private val characterListUC: GetCharacterListUC = GetCharacterListUC()
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow( UiState())
+    private val _state = MutableStateFlow(UiState())
     val state: StateFlow<UiState> = _state.asStateFlow()
+
+    private var requestJob: Job? = null
+
     init {
         refresh()
     }
@@ -31,9 +34,7 @@ class CharacterListViewModel(
         getCharacterList(Utils.createEndPointHash())
     }
 
-    private var requestJob: Job? = null
-
-    fun getCharacterList(hash: String){
+    fun getCharacterList(hash: String) {
         requestJob?.cancel()
         val list1 = mutableListOf<ResultVO>()
         requestJob = viewModelScope.launch(Dispatchers.IO) {
@@ -51,7 +52,7 @@ class CharacterListViewModel(
     }
 
     fun onNavigationDone() {
-       _state.value = _state.value.copy(navigateTo = null)
+        _state.value = _state.value.copy(navigateTo = null)
     }
 }
 

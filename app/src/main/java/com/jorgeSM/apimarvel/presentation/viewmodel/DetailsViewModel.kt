@@ -20,33 +20,35 @@ class DetailsViewModel(
 
     private val _character = MutableStateFlow(DetailState())
     val character: StateFlow<DetailState> get() = _character.asStateFlow()
+
+    private var requestJob: Job? = null
+
     init {
         refresh()
     }
 
+
     private fun refresh() =
-        viewModelScope.launch{
+        viewModelScope.launch {
             _character.value = DetailState(loading = true)
         }
 
-
-    private var requestJob: Job? = null
-
     fun getCharacterById(id: String, hash: String) {
-
         requestJob?.cancel()
         requestJob = viewModelScope.launch(Dispatchers.IO) {
             getCharacterByIdUC(
                 CharacterItemByIdRequest(id, hash)
             )?.let {
                 it.data?.results?.map { result ->
-                    _character.value = DetailState(character = result.transformToVO(), loading = false)
+                    _character.value =
+                        DetailState(character = result.transformToVO(), loading = false)
                 }
             }
         }
     }
 }
+
 data class DetailState(
-    val loading:Boolean = false,
+    val loading: Boolean = false,
     val character: ResultVO? = null
 )

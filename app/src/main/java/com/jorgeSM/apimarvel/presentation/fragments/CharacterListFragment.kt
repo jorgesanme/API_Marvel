@@ -20,6 +20,8 @@ import com.jorgeSM.apimarvel.presentation.adapter.CharacterAdapter
 import com.jorgeSM.apimarvel.presentation.modelVO.ResultVO
 import com.jorgeSM.apimarvel.utils.Utils
 import com.jorgeSM.apimarvel.presentation.viewmodel.CharacterListViewModel
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class CharacterListFragment : Fragment() {
@@ -42,7 +44,6 @@ class CharacterListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupToolbar()
-        showProgressbar()
         initList()
         setupObserver()
     }
@@ -54,21 +55,15 @@ class CharacterListFragment : Fragment() {
         }
     }
 
-    private fun showProgressbar() {
-        mBinding.progressBar.progress
-    }
-
-
     private fun initList() {
         mContext = mBinding.root.context
         mViewModel.getCharacterList(Utils.createEndPointHash())
     }
 
-
     private fun setupObserver() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
-                mViewModel.state.collect{
+                mViewModel.state.map { it }.distinctUntilChanged().collect{
                     it.characters?.let { list ->
                         setupRecycleView(list)
                     }

@@ -11,12 +11,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-/*****
- * Projecto: Api marvel
- * From: com.jorgeSM.apimarvel.data
- * Create by Jorge S. Medina on 8/9/22 at 15:38
- * More info: https://www.linkedin.com/in/jorge-s%C3%A1nchez-medina-bb7b7371/
- *****/
+
 class MarvelRepositoryImp : MarvelRepositoryDataSource {
 
     private var api: MarvelApi
