@@ -1,4 +1,4 @@
-package com.jorgeSM.apimarvel.data.remote.models
+package com.jorgeSM.apimarvel.data.remote.dto
 
 import com.squareup.moshi.JsonClass
 import java.io.Serializable
@@ -12,62 +12,88 @@ data class CharacterResponseDTO(
     val attributionText: String? = null,
     val attributionHTML: String? = null,
     val eTag: String? = null,
-    val data: Data? = null
+    val data: DataDTO? = null
 ) : Serializable
 
-data class Data(
+data class DataDTO(
     val offset: Long? = null,
     val limit: Long? = null,
     val total: Long? = null,
     val count: Long? = null,
-    val results: List<Result>? = null
+    val results: List<ResultDTO>? = null
 )
 
-data class Result(
+data class ResultDTO(
     val id: Long? = null,
     val name: String? = null,
     val description: String? = null,
     val modified: String? = null, // FIXME: ver en doc si viene como long o Date
-    val thumbnail: Thumbnail? = null,
+    val thumbnail: ThumbnailDTO? = null,
     val resourceURI: String? = null,
-    val comics: Comics? = null,
-    val series: Comics? = null,
-    val stories: Stories? = null,
-    val events: Comics? = null,
-    val urls: List<URL>? = null
+    val comics: ComicsDTO? = null,
+    val series: SeriesDTO? = null,
+    val stories: StoriesDTO? = null,
+    val events: EventDTO? = null,
+    val urls: List<URLDTO>? = null
 )
 
-data class Comics(
+data class ComicsDTO(
     val available: Long? = null,
     val collectionURI: String? = null,
-    val items: List<ComicsItem>? = null,
+    val items: List<ComicsItemDTO>? = null,
     val returned: Long? = null
 )
 
-data class Stories(
+data class SeriesDTO(
     val available: Long? = null,
     val collectionURI: String? = null,
-    val items: List<StoriesItem>? = null,
+    val items: List<SeriesItemDTO>? = null,
     val returned: Long? = null
 )
 
-data class URL(
+
+data class StoriesDTO(
+    val available: Long? = null,
+    val collectionURI: String? = null,
+    val items: List<StoriesItemDTO>? = null,
+    val returned: Long? = null
+)
+
+data class EventDTO(
+    val available: Long? = null,
+    val collectionURI: String? = null,
+    val items: List<EventsItemDTO>? = null,
+    val returned: Long? = null
+)
+
+data class URLDTO(
     val type: String? = null,
     val url: String? = null
 )
 
-data class ComicsItem(
+data class ComicsItemDTO(
     val resourceURI: String? = null,
     val name: String? = null
 )
 
-data class StoriesItem(
+data class SeriesItemDTO(
+    val resourceURI: String? = null,
+    val name: String? = null
+)
+
+data class StoriesItemDTO(
     val resourceURI: String? = null,
     val name: String? = null,
     val type: String? = null
 )
 
-data class Thumbnail(
+data class EventsItemDTO(
+    val resourceURI: String? = null,
+    val name: String? = null
+)
+
+
+data class ThumbnailDTO(
     val path: String? = null,
     val extension: String? = null
 )

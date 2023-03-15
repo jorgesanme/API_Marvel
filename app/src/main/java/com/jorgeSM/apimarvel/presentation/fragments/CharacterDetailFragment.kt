@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.jorgeSM.apimarvel.databinding.FragmentCharacterDetailBinding
@@ -15,6 +18,7 @@ import com.jorgeSM.apimarvel.presentation.modelVO.ResultVO
 import com.jorgeSM.apimarvel.presentation.viewmodel.DetailsViewModel
 import com.jorgeSM.apimarvel.utils.Utils
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
+import kotlinx.coroutines.launch
 
 const val CHARACTER_ID = "id"
 const val CHARACTER_NAME = "name"
@@ -36,21 +40,20 @@ class CharacterDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         getParams()
         setupToolbar()
-        showProgressbar()
         getCharacterDetails()
         setupObserver()
     }
 
-
-    private fun showProgressbar() {
-        mBinding.progressBar.progress
-    }
-
-
     private fun setupObserver() {
-        mViewModel.character.observe(viewLifecycleOwner) {
-            setupView(it)
-            mBinding.progressBar.visibility = if (it == null) View.VISIBLE else View.GONE
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                mViewModel.character.collect {
+                    it.character?.let { resultVO ->
+                        setupView(resultVO)
+                    }
+                    mBinding.progressBar.visibility = if (it.loading) View.VISIBLE else View.GONE
+                }
+            }
         }
     }
 
